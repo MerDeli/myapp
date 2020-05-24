@@ -1,4 +1,5 @@
 import request from 'umi-request';
+import {API, APPNAME} from "@/utils/Api";
 
 export interface LoginParamsType {
   userName: string;
@@ -8,9 +9,16 @@ export interface LoginParamsType {
 }
 
 export async function fakeAccountLogin(params: LoginParamsType) {
-  return request('/api/login/account', {
-    method: 'POST',
+  // const params = {...param,'client_id':'admin',
+  //   'client_secret':'admin123',
+  //   'grant_type':'password',
+  //   'scope':'all'}
+  return request(`${APPNAME}${API.login.login.uri}`, {
+    method: `${API.login.login.method}`,
     data: params,
+    headers:{
+      Authorization: 'Basic ' + btoa(`admin:admin123`).toString(),
+    }
   });
 }
 

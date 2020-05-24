@@ -7,10 +7,10 @@
  */
 export default {
   dev: {
-    'http://localhost:8000': {
-      target: 'http://localhost:9003',
+    '/user/interface-test/': {
+      target: 'http://localhost:9003/',
       changeOrigin: true,
-      pathRewrite: { '^': '' },
+      pathRewrite: { '^/user/interface-test/': '' },
     },
   },
   test: {

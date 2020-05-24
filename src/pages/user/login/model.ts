@@ -30,7 +30,8 @@ const Model: ModelType = {
 
   effects: {
     *login({ payload }, { call, put }) {
-      const response = yield call(fakeAccountLogin, payload);
+      const nPayload = { ...payload, grant_type: `password` };
+      const response = yield call(fakeAccountLogin, nPayload);
       yield put({
         type: 'changeLoginStatus',
         payload: response,
