@@ -42,7 +42,7 @@ const Model: ModelType = {
         message.success('登录成功！');
         setToken(JSON.stringify(response));
         const currentUser = yield call(getUserInfo);
-        if (!currentUser.data.canAdminLogin) {
+        if (!currentUser.data) {
           yield put({
             type: 'changeLoginStatus',
             payload: {

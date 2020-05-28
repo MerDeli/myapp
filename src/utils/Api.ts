@@ -5,14 +5,22 @@ export const LOGIN_TOKEN_KEY = 'accessToken';
 export const API = {
   login:{
     login:{
-      uri:'/auth/oauth/token',
+      uri:'/secur/oauth/token',
       method:'post'
     },
     getInfo:{
-      uri:'/auth/sso/getInfo',
+      uri:'/secur/sso/getInfo',
       method:'get'
     },
-  }
+  },
+  // auth:{
+  //   account:{
+  //     getInfo:{
+  //       uri:'/auth/sso/getInfo',
+  //       method:'get'
+  //     },
+  //   }
+  // }
 }
 
 

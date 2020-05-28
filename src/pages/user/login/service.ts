@@ -1,7 +1,7 @@
 import request from 'umi-request';
 import {API, APPNAME} from "@/utils/Api";
 import {stringify} from 'qs';
-import {getAccessToken, getToken} from "@/utils/LocalStorage";
+import {getAccessToken} from "@/utils/LocalStorage";
 
 export interface LoginParamsType {
   userName: string;
