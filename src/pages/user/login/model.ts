@@ -1,7 +1,8 @@
 import { Effect, history, Reducer } from 'umi';
 import { message } from 'antd';
-import { fakeAccountLogin, getFakeCaptcha } from './service';
+import { fakeAccountLogin, getFakeCaptcha,getUserInfo } from './service';
 import { getPageQuery, setAuthority } from './utils/utils';
+import {setToken} from "@/utils/LocalStorage";
 
 export interface StateType {
   status?: 'ok' | 'error';
@@ -37,8 +38,21 @@ const Model: ModelType = {
         payload: response,
       });
       // Login successfully
-      if (response.status === 'ok') {
+      if (response && response.access_token) {
         message.success('登录成功！');
+        setToken(JSON.stringify(response));
+        const currentUser = yield call(getUserInfo);
+        if (!currentUser.data.canAdminLogin) {
+          yield put({
+            type: 'changeLoginStatus',
+            payload: {
+              code: 400,
+              message: '无权登录',
+              type: payload.type,
+            },
+          });
+          return;
+        }
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         let { redirect } = params as { redirect: string };
